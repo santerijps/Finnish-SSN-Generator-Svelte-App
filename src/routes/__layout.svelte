@@ -1,0 +1,14 @@
+<main>
+  <slot></slot>
+</main>
+
+
+<style>
+
+  main {
+    margin: auto;
+    max-width: 1200px;
+    width: 90%;
+  }
+
+</style>

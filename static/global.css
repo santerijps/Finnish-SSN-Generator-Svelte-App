@@ -1,0 +1,75 @@
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
+* {
+  font-family: monospace;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 1em 0 1em 0;
+}
+
+main > h1, h2, h3, h4, h5, h6 {
+  font-size: 3em;
+  text-align: center;
+}
+
+input, button, select {
+  font-size: 1.5em;
+  padding: 0.5em;
+}
+
+input[type="text"], input[type="number"], select {
+  margin: auto;
+  text-align: center;
+  width: 75%;
+}
+
+input[type="radio"] {
+  transform: scale(1.5);
+}
+
+fieldset {
+  padding: 2em;
+}
+
+legend {
+  font-size: 2em;
+}
+
+table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+th, td {
+  padding: 2em;
+}
+
+tr > td:nth-child(1) {
+  font-size: 2em;
+}
+
+tr > td:nth-child(3) {
+  text-align: center;
+}
+
+tr > td:nth-child(3) > * {
+  font-size: 1.5em;
+}
+
+tr > td:nth-child(3) > input {
+  width: 25%;
+}
+
+td div {
+  font-size: 1.5em;
+}
+
+td > button {
+  width: 75%;
+}
