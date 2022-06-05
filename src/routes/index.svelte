@@ -6,8 +6,8 @@
   let selectedAgeOption = Age.Random;
   let selectedSexOption = Sex.Random;
 
-  let selectedExactAge = 18;
-  let selectedMinAge = 35;
+  let selectedExactAge = 35;
+  let selectedMinAge = 18;
   let selectedMaxAge = 65;
   let selectedCount = 1;
   let ssnList = [];
