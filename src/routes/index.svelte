@@ -1,26 +1,36 @@
 <script>
 
   import { Age, Sex } from "$lib/enum";
-  import { getRandomSSN } from "$lib/ssn";
+  import { RandomSSN } from "$lib/ssn";
 
-  let selectedAgeOption = Age.Range;
+  let selectedAgeOption = Age.Random;
   let selectedSexOption = Sex.Random;
 
   let selectedExactAge = 18;
-  let selectedMinAge = 0;
+  let selectedMinAge = 35;
   let selectedMaxAge = 65;
   let selectedCount = 1;
   let ssnList = [];
 
-  const onFormSubmit = () => {
+  const onFormSubmit = async () => {
+    let ssnFunction = null;
+    switch (selectedAgeOption) {
+      case Age.Random:
+        ssnFunction = () => RandomSSN.between(0, 120, selectedSexOption);
+        break;
+      case Age.Exact:
+        ssnFunction = () => RandomSSN.exactly(selectedExactAge, selectedSexOption);
+        break;
+      case Age.Between:
+        selectedMinAge = Math.min(selectedMinAge, selectedMaxAge);
+        ssnFunction = () => RandomSSN.between(selectedMinAge, selectedMaxAge, selectedSexOption);
+        break;
+      default:
+        console.error("Unhandled ageOption case: " + selectedAgeOption);
+    }
     ssnList = [];
     for (let i = 0; i < selectedCount; i++) {
-      const ssn = getRandomSSN(selectedAgeOption, selectedSexOption, {
-        exactAge: selectedExactAge,
-        minAge: selectedMinAge,
-        maxAge: selectedMaxAge,
-      });
-      ssnList.push(ssn);
+      ssnList.push(ssnFunction());
     }
   };
 
@@ -52,16 +62,16 @@
                 Exact
               </div>
               <div>
-                <input type="radio" bind:group={selectedAgeOption} value={Age.Range} />
+                <input type="radio" bind:group={selectedAgeOption} value={Age.Between} />
                 Between
               </div>
             </td>
             <td>
               {#if selectedAgeOption === Age.Random}
-                <span>TODO: Display age range dynamically</span>
+                <span>Ages 0 - 120</span>
               {:else if selectedAgeOption === Age.Exact}
                 <input type="number" min="0" max={130} placeholder="Age" bind:value={selectedExactAge} />
-              {:else if selectedAgeOption === Age.Range}
+              {:else if selectedAgeOption === Age.Between}
                 <input type="number" min="0" max={130} placeholder="Min" bind:value={selectedMinAge} />
                 ━
                 <input type="number" min="0" max={130} placeholder="Max" bind:value={selectedMaxAge} />

@@ -1,7 +1,7 @@
 export const Age = {
-  Random: 0,
-  Exact:  1,
-  Range:  2,
+  Random:   0,
+  Exact:    1,
+  Between:  2,
 };
 
 export const Sex = {
