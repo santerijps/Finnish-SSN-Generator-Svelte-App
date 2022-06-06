@@ -3,6 +3,9 @@
   import { Age, Sex } from "$lib/enum";
   import { RandomSSN } from "$lib/ssn";
 
+  const copyButtonTextDefault = "Copy values to clipboard";
+  const copyButtonTextDone = "Saved to clipboard!";
+
   let selectedAgeOption = Age.Random;
   let selectedSexOption = Sex.Random;
 
@@ -11,6 +14,7 @@
   let selectedMaxAge = 65;
   let selectedCount = 1;
   let ssnList = [];
+  let copyButtonText = copyButtonTextDefault;
 
   const onFormSubmit = async () => {
     let ssnFunction = null;
@@ -32,6 +36,13 @@
     for (let i = 0; i < selectedCount; i++) {
       ssnList.push(ssnFunction());
     }
+  };
+
+  const copySsnList = async () => {
+    const text = ssnList.join("\n");
+    await navigator.clipboard.writeText(text);
+    copyButtonText = copyButtonTextDone;
+    setTimeout(() => copyButtonText = copyButtonTextDefault, 5000);
   };
 
 </script>
@@ -103,7 +114,11 @@
     </fieldset>
   </form>
   <div align="center">
-    <pre>{#each ssnList as ssn}{ssn + "\n"}{/each}</pre>
+    {#if ssnList.length > 0}
+      <br/>
+      <button on:click={copySsnList}>{copyButtonText}</button>
+      <pre>{#each ssnList as ssn}{ssn + "\n"}{/each}</pre>
+    {/if}
   </div>
   <br>
 </main>
