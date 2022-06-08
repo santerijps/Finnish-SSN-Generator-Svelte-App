@@ -23,7 +23,7 @@ export const get = async ({ url }) => {
     age = age / 1;
     if (Number.isInteger(age)) {
       repeat(count, () => {
-        result.ssn.push(RandomSSN.exactly(age, sex));
+        result.ssn.push(RandomSSN.is(age, sex));
       });
     }
   }

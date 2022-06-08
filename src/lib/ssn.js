@@ -1,4 +1,4 @@
-import { newDateZeroTime, newDateDelta, randomDateFromAgeRange } from "$lib/dateutil";
+import { newDateZeroTime, newDateDelta, randomDateFromAge, randomDateFromAgeRange } from "$lib/dateutil";
 import { randomNumber, randomEvenNumber, randomOddNumber } from "$lib/util";
 import { Sex } from "$lib/enum";
 
@@ -55,6 +55,11 @@ const generateSsnAgeExactly = (years, sex) => {
   return generateSsnFromDate(date, sex);
 };
 
+const generateSsnAgeIs = (years, sex) => {
+  const date = randomDateFromAge(years)
+  return generateSsnFromDate(date, sex);
+};
+
 const generateSsnAgeOneDayShyFrom = (years) => {
   const date = newDateDelta(newDateZeroTime(), -years, 0, +1);
   return generateSsnFromDate(date);
@@ -74,6 +79,10 @@ export class RandomSSN {
 
   static exactly(years, sex) {
     return generateSsnAgeExactly(years, sex);
+  }
+
+  static is(years, sex) {
+    return generateSsnAgeIs(years, sex);
   }
 
   static almost(years) {

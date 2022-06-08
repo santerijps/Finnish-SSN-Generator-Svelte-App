@@ -23,7 +23,7 @@
         ssnFunction = () => RandomSSN.between(0, 120, selectedSexOption);
         break;
       case Age.Exact:
-        ssnFunction = () => RandomSSN.exactly(selectedExactAge, selectedSexOption);
+        ssnFunction = () => RandomSSN.is(selectedExactAge, selectedSexOption);
         break;
       case Age.Between:
         selectedMinAge = Math.min(selectedMinAge, selectedMaxAge);
